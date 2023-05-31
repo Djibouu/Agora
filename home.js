@@ -13,12 +13,13 @@ window.addEventListener('scroll', () => {
 });
 
 
-//POP UP__________________________________________________________________________________
-
 document.addEventListener("DOMContentLoaded", function () {
-  
-  const closeIcon = document.querySelector(".close");
 
+  //POP UP__________________________________________________________________________________
+
+  const closeIcon = document.querySelector(".close");
+  const body = document.querySelector("body"); // Récupérer l'élément body
+  
   // Récupérer le bouton de connexion
   const connexionButton = document.querySelector("#hero button.btn-outline-secondary");
 
@@ -31,6 +32,7 @@ document.addEventListener("DOMContentLoaded", function () {
   connexionButton.addEventListener("click", function () {
     popup.classList.add("show");
     body.classList.add("popup-opened");
+    body.classList.add("blur"); // Ajouter la classe "blur" à l'élément body
   });
 
   connexionButtonPopUp.addEventListener("click", function () {
@@ -45,19 +47,21 @@ document.addEventListener("DOMContentLoaded", function () {
   closeIcon.addEventListener("click", function () {
     popup.classList.remove("show");
     body.classList.remove("popup-opened");
+    body.classList.remove("blur"); // Supprimer la classe "blur" de l'élément body
   });
 
   window.addEventListener("scroll", function () {
     popup.style.top = "50%";
   });
-});
+
+  //POP UP__________________________________________________________________________________
 
 
 
-//POP UP__________________________________________________________________________________
 
 
-document.addEventListener("DOMContentLoaded", function () {
+
+
     // Custom smooth scrolling function
   function smoothScrollTo(element, duration) {
     const start = window.scrollY;
@@ -110,4 +114,5 @@ document.addEventListener("DOMContentLoaded", function () {
       header.classList.remove('scrolled');
     }
   });
+
 });
