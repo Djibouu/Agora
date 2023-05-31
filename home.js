@@ -12,6 +12,51 @@ window.addEventListener('scroll', () => {
   }
 });
 
+
+//POP UP__________________________________________________________________________________
+
+document.addEventListener("DOMContentLoaded", function () {
+  
+  const closeIcon = document.querySelector(".close");
+
+  // Récupérer le bouton de connexion
+  const connexionButton = document.querySelector("#hero button.btn-outline-secondary");
+
+  // Récupérer le bouton "Créer un compte"
+  const createAccountButton = document.querySelector("#createAccountButton");
+
+  // Récupérer l'élément bouton pop-up connexion
+  const connexionButtonPopUp = document.querySelector("#ConnexionButton");
+
+  connexionButton.addEventListener("click", function () {
+    popup.classList.add("show");
+    body.classList.add("popup-opened");
+  });
+
+  connexionButtonPopUp.addEventListener("click", function () {
+    popup.classList.remove("show");
+    body.classList.remove("popup-opened");
+  });
+
+  createAccountButton.addEventListener("click", function () {
+    window.location.href = "createAccount.html";
+  });
+
+  closeIcon.addEventListener("click", function () {
+    popup.classList.remove("show");
+    body.classList.remove("popup-opened");
+  });
+
+  window.addEventListener("scroll", function () {
+    popup.style.top = "50%";
+  });
+});
+
+
+
+//POP UP__________________________________________________________________________________
+
+
 document.addEventListener("DOMContentLoaded", function () {
     // Custom smooth scrolling function
   function smoothScrollTo(element, duration) {
