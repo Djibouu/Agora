@@ -45,7 +45,6 @@ align-items: center;
 text-align: center;
 background-size: cover;
 background-position: center;
-background: url(/images/tate.jpg); 
 
 position: relative;
 padding: 5rem 2rem;
@@ -158,39 +157,73 @@ color: #808000;
 }
 
 
+
+/* styling du popup */
   
 .popup {
-    position: fixed;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    background-color: #f5f5f5;
-    padding: 20px;
-    display: none;
-  }
-  
-  .popup.show {
-    display: block; /* Afficher la pop-up lorsque la classe "show" est ajoutée */
-  }
-  
-  .popup input,
-  .popup button {
-    display: block;
-    margin-bottom: 10px;
-  }
-  
-  .close {
-    position: absolute;
-    top: 10px;
-    right: 10px;
-    font-size: 24px;
-    font-weight: bold;
-    cursor: pointer;
-  }
-  
-  .popup-opened {
-    filter: blur(5px);
-    pointer-events: none;
-  }
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background-color: #f5f5f5;
+  padding: 20px;
+  display: none;
+  z-index: 1002;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  width: 70%;
+  max-width: 400px; /* Ajoutez cette ligne pour limiter la largeur maximale de la popup */
+  filter: none;
+}
 
-  
+.popup.show {
+  display: block;
+}
+
+.popup input,
+.popup button {
+  display: block;
+  margin-bottom: 10px;
+}
+
+.close {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  font-size: 24px;
+  font-weight: bold;
+  cursor: pointer;
+  color: #808000;
+}
+
+.popup-opened {
+  filter: none;
+  /* pointer-events: none; */
+}
+
+/* Ajoutez les couleurs de votre choix */
+.popup input[type="text"],
+.popup input[type="email"],
+.popup button {
+  background-color: #fff;
+  border: 1px solid #808000;
+  padding: 5px;
+  color: #333;
+}
+
+.popup button {
+  background-color: #808000;
+  color: #fff;
+  border: none;
+  padding: 10px 20px;
+  cursor: pointer;
+}
+
+.popup button:hover {
+  background-color: #666;
+}
+
+.blur:not(.popup){
+  filter: blur(5px); /* Ajouter un flou de 5 pixels */
+  pointer-events: none; /* Désactiver les événements de souris sur le contenu flou */
+}
+
