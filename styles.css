@@ -1,10 +1,11 @@
 body {
-font-family: 'Poppins', Arial, sans-serif;
-line-height: 1.6;
-color: #333;
-background-color: #ffffff;
-overflow-x: hidden;
-}
+    font-family: 'Poppins', Arial, sans-serif;
+    line-height: 1.6;
+    color: #333;
+    background-color: #ffffff;
+    overflow-x: hidden;
+    overflow-y: auto; /* Utilisez "auto" au lieu de "scroll" pour activer le défilement uniquement lorsque nécessaire */
+  }
 
 nav a {
 color: #2a2a2a;
@@ -156,3 +157,40 @@ color: #808000;
     transform: translateY(-10px);
 }
 
+
+  
+.popup {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: #f5f5f5;
+    padding: 20px;
+    display: none;
+  }
+  
+  .popup.show {
+    display: block; /* Afficher la pop-up lorsque la classe "show" est ajoutée */
+  }
+  
+  .popup input,
+  .popup button {
+    display: block;
+    margin-bottom: 10px;
+  }
+  
+  .close {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    font-size: 24px;
+    font-weight: bold;
+    cursor: pointer;
+  }
+  
+  .popup-opened {
+    filter: blur(5px);
+    pointer-events: none;
+  }
+
+  
