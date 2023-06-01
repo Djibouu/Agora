@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Form</title>
+  <link rel="stylesheet" type="text/css" href="SingIn.css">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+
+</head>
+<body>
+
+<form id="myForm" class="container mt-5">
+    <div class="form-group">
+        <label for="userType">Choose user type:</label>
+        <select id="userType" name="userType" class="form-control">
+        <option value="">Select user type</option>
+        <option value="vendeur">Vendeur</option>
+        <option value="acheteur">Acheteur</option>
+        </select>
+    </div>
+      
+  
+
+    <label for="nom" class="hidden">Nom:</label>
+    <input type="text" id="nom" name="nom" class="hidden" required>
+
+    <label for="prenom" class="hidden">Prenom:</label>
+    <input type="text" id="prenom" name="prenom" class="hidden" required>
+
+    <label for="email" class="hidden">Email:</label>
+    <input type="email" id="email" name="email" class="hidden" required>
+
+    <label for="password" class="hidden">Password:</label>
+    <input type="password" id="password" name="password" class="hidden" required>
+
+    <label for="pseudo" class="hidden">Pseudo:</label>
+    <input type="text" id="pseudo" name="pseudo" class="hidden" required>
+
+    <label for="image" class="hidden">Image:</label>
+    <input type="text" id="image" name="image" class="hidden" required>
+
+    <label for="adresse" class="hidden">Adresse:</label>
+    <input type="text" id="adresse" name="adresse" class="hidden">
+
+    <label for="ville" class="hidden">Ville:</label>
+    <input type="text" id="ville" name="ville" class="hidden">
+
+    <label for="codePostal" class="hidden">Code Postal:</label>
+    <input type="text" id="codePostal" name="codePostal" class="hidden">
+
+    <label for="pays" class="hidden">Pays:</label>
+    <input type="text" id="pays" name="pays" class="hidden">
+
+    <label for="typePaiement" class="hidden">Type de Paiement:</label>
+    <input type="text" id="typePaiement" name="typePaiement" class="hidden">
+
+    <label for="numeroCarte" class="hidden">Numero de Carte:</label>
+    <input type="text" id="numeroCarte" name="numeroCarte" class="hidden">
+
+    <label for="nomCarte" class="hidden">Nom de Carte:</label>
+    <input type="text" id="nomCarte" name="nomCarte" class="hidden">
+
+    <label for="dateExpiration" class="hidden">Date d'Expiration:</label>
+    <input type="date" id="dateExpiration" name="dateExpiration" class="hidden">
+
+    <label for="codeCarte" class="hidden">Code de Carte:</label>
+    <input type="text" id="codeCarte" name="codeCarte" class="hidden">
+
+    <button type="submit" id="submitBtn" class="hidden">Submit</button>
+  </form>
+  <script src="SingIn.js"></script>
+  
+</body>
+</html>

@@ -41,7 +41,7 @@ document.addEventListener("DOMContentLoaded", function () {
   
 
   createAccountButton.addEventListener("click", function () {
-    window.location.href = "createAccount.html";
+    window.location.href = "SingIn.html";
   });
 
   closeIcon.addEventListener("click", function () {
