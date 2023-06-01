@@ -16,7 +16,7 @@ window.addEventListener('scroll', () => {
 document.addEventListener("DOMContentLoaded", function () {
 
   //POP UP__________________________________________________________________________________
-
+  const popup = document.querySelector("#popup");
   const closeIcon = document.querySelector(".close");
   const body = document.querySelector("body"); // Récupérer l'élément body
   
@@ -28,26 +28,25 @@ document.addEventListener("DOMContentLoaded", function () {
 
   // Récupérer l'élément bouton pop-up connexion
   const connexionButtonPopUp = document.querySelector("#ConnexionButton");
-
+  
   connexionButton.addEventListener("click", function () {
-    popup.classList.add("show");
+    popup.style.display = "block";
     body.classList.add("popup-opened");
-    body.classList.add("blur"); // Ajouter la classe "blur" à l'élément body
   });
 
   connexionButtonPopUp.addEventListener("click", function () {
-    popup.classList.remove("show");
+    popup.style.display = "none";
     body.classList.remove("popup-opened");
   });
+  
 
   createAccountButton.addEventListener("click", function () {
     window.location.href = "createAccount.html";
   });
 
   closeIcon.addEventListener("click", function () {
-    popup.classList.remove("show");
+    popup.style.display = "none";
     body.classList.remove("popup-opened");
-    body.classList.remove("blur"); // Supprimer la classe "blur" de l'élément body
   });
 
   window.addEventListener("scroll", function () {
