@@ -222,8 +222,3 @@ color: #808000;
   background-color: #666;
 }
 
-.blur:not(.popup){
-  filter: blur(5px); /* Ajouter un flou de 5 pixels */
-  pointer-events: none; /* Désactiver les événements de souris sur le contenu flou */
-}
-
