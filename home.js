@@ -12,6 +12,19 @@ window.addEventListener('scroll', () => {
   }
 });
 
+document.addEventListener("DOMContentLoaded", function() {
+  var dropdownMenu = document.getElementById("dropdownMenu");
+
+  // Fonction exécutée lorsqu'on clique sur le bouton "Votre Compte"
+  document.getElementById("yourAccountButton").addEventListener("click", function() {
+      // Vérifier si l'utilisateur est connecté
+      var identifiant = "<?php echo isset($_SESSION['identifiant']) ? $_SESSION['identifiant'] : ''; ?>";
+      if (identifiant !== "") {
+          // Ajouter les identifiants dans le menu déroulant
+          dropdownMenu.innerHTML = "<li><a class='dropdown-item'>" + identifiant + "</a></li>";
+      }
+  });
+});
 
 document.addEventListener("DOMContentLoaded", function () {
 
@@ -41,9 +54,8 @@ document.addEventListener("DOMContentLoaded", function () {
   
 
   createAccountButton.addEventListener("click", function () {
-    window.location.href = "SingUp.html";
+    
   });
-
   closeIcon.addEventListener("click", function () {
     popup.style.display = "none";
     body.classList.remove("popup-opened");
@@ -51,12 +63,18 @@ document.addEventListener("DOMContentLoaded", function () {
 
   window.addEventListener("scroll", function () {
     popup.style.top = "50%";
+
+  
   });
 
+  
   //POP UP__________________________________________________________________________________
 
+  //VOTRE COMPTE____________________________________________________________________________
 
 
+
+  //VOTRE COMPTE____________________________________________________________________________
 
 
 

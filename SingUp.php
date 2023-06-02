@@ -26,9 +26,10 @@ if ($db_found) {
     // Vérifier le type d'utilisateur
     if ($userType === "acheteur") {
         // Insérer les données dans la table "acheteur"
-        $sql = "INSERT INTO acheteur (Nom, Prenom, email, Password, Pseudo, Image, Adresse, Ville, Code_Postal, Pays, Type_de_Payement, Numero_Carte, Nom_Carte, Date_Expritation, Code_Carte) 
-                VALUES ('$nom', '$prenom', '$email', '$password', '$pseudo', ?, '$adresse', '$ville', '$codePostal', '$pays', '$typePaiement', '$numeroCarte', '$nomCarte', '$dateExpiration', '$codeCarte')";
-        mysqli_query($db_handle, $sql);
+        $sql = "INSERT INTO acheteur (Nom, Prenom, email, Password, Pseudo, Adresse, Ville, Code_Postal, Pays, Type_de_Payement, Numero_Carte, Nom_Carte, Date_Expritation, Code_Carte, Image) 
+                VALUES ('$nom', '$prenom', '$email', '$password', '$pseudo', '$adresse', '$ville', '$codePostal', '$pays', '$typePaiement', '$numeroCarte', '$nomCarte', '$dateExpiration', '$codeCarte', ?)";
+        $stmt = mysqli_prepare($db_handle, $sql);
+
         // Lire le contenu de l'image
         $imageData = file_get_contents($image);
 
