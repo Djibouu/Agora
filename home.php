@@ -18,7 +18,7 @@
   <header>
         <nav class="navbar navbar-expand-xl bg-body-tertiary fixed-top py-lg-3">
           <div class="container-fluid">
-            <a id="agoraButton" class="navbar-brand " href="home.html">Agora France</a>
+            <a id="agoraButton" class="navbar-brand " href="home.php">Agora France</a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
               <span class="navbar-toggler-icon"></span>
             </button>
@@ -40,7 +40,7 @@
                   if (isset($_SESSION["identifiant"])) {
                       echo '<a href="account/account.php" class="nav-link active" id="accountLink" aria-current="page">' . $_SESSION['identifiant'] . '</a>';
                   } else {
-                      echo '<a href="#" class="nav-link active popup-link" id="nonConnecte" aria-current="page">Vous n\'êtes pas connecté</a>';
+                      echo '<a href="#" class="nav-link active popup-link connexion" aria-current="page">Vous n\'êtes pas connecté</a>';
                   }
                   ?>
               </li>
@@ -57,8 +57,14 @@
         <h1>Bienvenue sur Agora France !</h1>
         <p>Le site n°1 des matériels de sécurité en France.</p>
         <div>
-          <a href=""><button type="button" class="btn btn-outline-primary .btn-lg" >BOUTIQUE</button></a>
-          <a href=""></a><button type="button" class="btn btn-outline-secondary">CONNEXION</button></a>
+          <a href='boutique/shop.php'><button type="button" class="btn btn-outline-primary .btn-lg" >BOUTIQUE</button></a>
+          <?php
+                  if (isset($_SESSION["identifiant"])) {
+                  } else {
+                      echo '<a href=""></a><button type="button" class="btn btn-outline-secondary">CONNEXION</button></a>';
+                  }
+                  ?>
+          
         </div>
 
 
@@ -71,7 +77,7 @@
           <input type="password" placeholder="Mot de passe" name="mot_de_passe">
           <button id="ConnexionButton" name="LogIn" type="submit" formaction="connexion.php">Connexion</button>
         </form>
-        <button id="createAccountButton" name="SingUp">Créer un compte</button>
+        <button href="SungUp.html" id="createAccountButton" name="SingUp">Créer un compte</button>
       </div>
       <!-- Pour la Pop up -->
 
@@ -106,7 +112,7 @@
 
     <section id="pricings">
     <div class="container text-center">
-      <h2><u>Tendance du moment.</u></h2>
+      <h2><u>Séléction du jour.</u></h2>
       <br>
       <div class="row gx-5">
         <div class="col-md">

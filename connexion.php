@@ -27,7 +27,7 @@ if ($db_found) {
     } else {
         $sql = "SELECT * FROM acheteur WHERE email = '$identifiant' AND Password = '$motDePasse'";
         $result = mysqli_query($db_handle, $sql);
-
+        
         if (mysqli_num_rows($result) == 1) {
             // Informations de connexion correctes, enregistrer l'identifiant de l'utilisateur dans une variable de session
             $_SESSION["identifiant"] = $identifiant;
@@ -35,6 +35,11 @@ if ($db_found) {
             header("Location: home.php");
             exit;
         } else {
+            $sql = "SELECT * FROM admin WHERE email = '$identifiant' AND Password = '$motDePasse'";
+            $result = mysqli_query($db_handle, $sql);
+            if (mysqli_num_rows($result) == 1){
+                $_SESSION["identifiant"] = $identifiant;
+            }
             header("Location: home.php");
             
         }

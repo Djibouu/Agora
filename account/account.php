@@ -22,6 +22,11 @@ if ($result->num_rows == 0) {
     $sql = "SELECT * FROM vendeur WHERE email = '$user_id'";
     $result = $conn->query($sql);
 }
+if ($result->num_rows == 0) {
+    $user_type = 'admin';
+    $sql = "SELECT * FROM $user_type WHERE email = '$user_id'";
+    $result = $conn->query($sql);
+}
 
 ?>
 <!DOCTYPE html>
@@ -80,6 +85,9 @@ if ($result->num_rows == 0) {
                 echo '<div><strong>Email:</strong> ' . $row["email"]. "</div>";
                 if (array_key_exists("Adresse", $row)){
                     echo '<div><strong>Adresse:</strong> ' . $row["Adresse"]. ', '. $row["Ville"]. ', ' . $row["Code_Postal"]."</div>";
+                }
+                if($user_type == 'admin'){
+                    echo'<button onclick="location.href=\'deleteUser.php\'">gérer les utilisateurs</button>';
                 }
                 echo '</div>';
                 echo '<img src="data:image/jpeg;base64,'.base64_encode( $row['Image'] ).'" class="user-image"/>';

@@ -7,6 +7,42 @@
 
 </head>
 <body>
+    <header>
+        <nav class="navbar navbar-expand-xl bg-body-tertiary fixed-top py-lg-3">
+          <div class="container-fluid">
+            <a id="agoraButton" class="navbar-brand " href="home.php">Agora France</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+              <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+              <ul class="navbar-nav me-auto sm-2 sm-lg-0">
+                <li class="nav-item">
+                  <a class="nav-link active" aria-current="page">Boutique</a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link active" aria-current="page">Notifications</a>
+                </li>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link active" aria-current="page">Panier</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link active" aria-current="page">Votre Compte</a>
+                </li>
+                <li class="nav-item dropdown">
+                  <ul class="dropdown-menu">
+                    <li><a class="dropdown-item">Boutique</a></li>
+                    <li><a class="dropdown-item">Notifications</a></li>
+                    <li><a class="dropdown-item">Panier</a></li>
+                    <li><a class="dropdown-item">Votre Compte</a></li>
+                  </ul>
+                </li>
+                
+              </ul>
+            </div>
+          </div>
+        </nav>
+      </header>
 
   <form id="myForm" class="container mt-5" action="SingUp.php" method="POST" enctype="multipart/form-data">
     <div class="form-group">
@@ -57,7 +93,7 @@
 
     <label for="dateExpiration" class="hidden">Date d'Expiration:</label>
     <input type="date" id="dateExpiration" name="dateExpiration" class="hidden">
-
+    <br>
     <label for="codeCarte" class="hidden">Code de Carte:</label>
     <input type="text" id="codeCarte" name="codeCarte" class="hidden">
 

@@ -35,6 +35,7 @@ document.addEventListener("DOMContentLoaded", function () {
   
   // Récupérer le bouton de connexion
   const connexionButton = document.querySelector("#hero button.btn-outline-secondary");
+  const pasConnecte = document.querySelector(".connexion");
 
   // Récupérer le bouton "Créer un compte"
   const createAccountButton = document.querySelector("#createAccountButton");
@@ -46,7 +47,10 @@ document.addEventListener("DOMContentLoaded", function () {
     popup.style.display = "block";
     body.classList.add("popup-opened");
   });
-
+  pasConnecte.addEventListener("click", function () {
+    popup.style.display = "block";
+    body.classList.add("popup-opened");
+  });
   connexionButtonPopUp.addEventListener("click", function () {
     popup.style.display = "none";
     body.classList.remove("popup-opened");
@@ -54,7 +58,7 @@ document.addEventListener("DOMContentLoaded", function () {
   
 
   createAccountButton.addEventListener("click", function () {
-    
+    window.location.href = "SingUp.html";
   });
   closeIcon.addEventListener("click", function () {
     popup.style.display = "none";

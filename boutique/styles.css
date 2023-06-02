@@ -1,0 +1,247 @@
+body {
+    font-family: 'Poppins', Arial, sans-serif;
+    line-height: 1.6;
+    color: #333;
+    background-color: #ffffff;
+    overflow-x: hidden;
+    overflow-y: auto; /* Utilisez "auto" au lieu de "scroll" pour activer le défilement uniquement lorsque nécessaire */
+}
+
+header{
+  margin-bottom: 4%;
+}
+
+nav a {
+color: #2a2a2a;
+text-decoration: none;
+font-size: 3rem;
+font-weight: 600;
+position: relative;
+}
+
+nav a::after {
+content: "";
+position: absolute;
+width: 0;
+height: 2px;
+bottom: 0;
+left: 0;
+background-color: #808000;
+transition: width 0.4s;
+}
+
+nav a:hover {
+color: #808000;
+transition: ease-in-out 0.2s;
+}
+
+nav a:hover::after {
+width: 100%;
+}
+
+/* Hero Section */
+#hero {
+min-height: 100vh;
+display: flex;
+flex-direction: column;
+justify-content: center;
+align-items: center;
+text-align: center;
+background-size: cover;
+background-position: center;
+
+position: relative;
+padding: 5rem 2rem;
+}
+
+#hero h1 {
+font-size: 4rem;
+margin-bottom: 1rem;
+}
+
+#hero p {
+font-size: 1.6rem;
+max-width: 800px;
+}
+
+/* Features */
+#features {
+display: flex;
+justify-content: center;
+flex-wrap: wrap;
+background-color: #f5f5f5;
+padding: 2rem 2rem;
+border-top: 4px solid #808000;
+border-bottom: 4px solid #808000;
+}
+
+#features h2{
+    padding-bottom: 1rem;
+}
+
+/* Testimonials */
+#pricings {
+background-color: #f5f5f5;
+padding: 2rem;
+border-bottom: 4px solid #808000;
+}
+
+.pricing {
+background-color: #ffffff;
+border-radius: 5px;
+margin-bottom: 2rem;
+padding: 1rem;
+box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+transition: all 0.3s ease;
+}
+
+.pricing:hover {
+transform: translateY(-5px);
+box-shadow: 0 8px 12px rgba(0, 0, 0, 0.15);
+}
+
+/* Download */
+#meetuss {
+background-color: #f5f5f5;
+padding: 2rem 2rem;
+}
+
+#meetuss h2{
+    padding-bottom: 1rem;
+}
+
+/* Footer */
+footer {
+background-color: #333;
+color: rgba(255, 255, 255, 0.95);
+padding: 1rem;
+text-align: center;
+font-weight: 500;
+font-size: 0.9rem;
+}
+
+footer a {
+color: #333;
+text-decoration: none;
+}
+
+footer a:hover {
+color: #808000;
+}
+
+.back-to-top {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    background-color: #808000;
+    color: #333;
+    font-size: 80%;
+    width: 50px;
+    height: 50px;
+    line-height: 50px;
+    text-align: center;
+    border-radius: 50%;
+    cursor: pointer;
+    opacity: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: all 0.3s ease;
+    z-index: 1001;
+    }
+    
+    .back-to-top:hover {
+    opacity: 1;
+    background-color: #808000;
+    }
+    
+    .back-to-top.show {
+    opacity: 0.8;
+    transform: translateY(-10px);
+}
+
+
+
+/* styling du popup */
+  
+.popup {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background-color: #f5f5f5;
+  padding: 20px;
+  display: none;
+  z-index: 1002;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  width: 70%;
+  max-width: 400px; /* Ajoutez cette ligne pour limiter la largeur maximale de la popup */
+  filter: none;
+}
+
+.popup.show {
+  display: block;
+}
+
+.popup input,
+.popup button {
+  display: block;
+  margin-bottom: 10px;
+}
+
+.close {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  font-size: 24px;
+  font-weight: bold;
+  cursor: pointer;
+  color: #808000;
+}
+
+.popup-opened {
+  filter: none;
+  /* pointer-events: none; */
+}
+
+/* Ajoutez les couleurs de votre choix */
+.popup input[type="text"],
+.popup input[type="email"],
+.popup button {
+  background-color: #fff;
+  border: 1px solid #808000;
+  padding: 5px;
+  color: #333;
+}
+
+.popup button {
+  background-color: #808000;
+  color: #fff;
+  border: none;
+  padding: 10px 20px;
+  cursor: pointer;
+}
+
+.popup button:hover {
+  background-color: #666;
+}
+
+/* cartes de la page boutique */
+
+.product-card {
+  transition: transform 0.3s;
+  margin-bottom: 20px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  height: 100%;
+}
+.product-card:hover {
+  transform: scale(1.05);
+}
+.product-card .card-img-top {
+  flex: 1;
+}
+.product-card .card-body {
+  flex: none;
+}

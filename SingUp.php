@@ -54,23 +54,11 @@ if ($db_found) {
         // Exécuter la requête
         mysqli_stmt_execute($stmt);
         
-        // Afficher l'image
-        $lastInsertId = mysqli_insert_id($db_handle); // Récupérer l'ID de l'enregistrement inséré
-        $sql = "SELECT Image FROM vendeur WHERE ID = $lastInsertId";
-        $result = mysqli_query($db_handle, $sql);
-
-        if ($result && mysqli_num_rows($result) > 0) {
-            $row = mysqli_fetch_assoc($result);
-            $imageData = $row['Image'];
-            
-            // Afficher l'image dans votre page HTML
-            echo '<img src="data:image/jpeg;base64,' . base64_encode($imageData) . '" alt="Image">';
-        }
     } else {
         // Type d'utilisateur invalide
         die("Type d'utilisateur invalide");
     }
-    
+    header('Location:home.php');
 } else {
     //si le BDD n'existe pas
     echo "Database not found";
