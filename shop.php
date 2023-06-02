@@ -9,6 +9,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.0/css/all.min.css">
     <link rel="stylesheet" href="styles.css">
+    <script src="home.js"></script>
     <title>Shop</title>
     <style>
         .product-card {
@@ -19,37 +20,56 @@
         }
     </style>
 </head>
-<body>
-<header>
-        <nav class="navbar navbar-expand-xl bg-body-tertiary fixed-top py-lg-3">
-            <div class="container-fluid">
-                <a id="agoraButton" class="navbar-brand" href="\GitVisio\Agora-1\home.php">Agora France</a>
-                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
-                <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                    <ul class="navbar-nav me-auto sm-2 sm-lg-0">
-                        <li class="nav-item">
-                            <a class="nav-link active" aria-current="page" href="#">Boutique</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link active" aria-current="page" href="#">Notifications</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link active" aria-current="page" href="#">Panier</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link active" aria-current="page" href="#">Votre Compte</a>
-                        </li>
-                    </ul>
-                </div>
+
+    <header>
+    <nav class="navbar navbar-expand-xl bg-body-tertiary fixed-top py-lg-3">
+          <div class="container-fluid">
+            <a id="agoraButton" class="navbar-brand " href="home.php">Agora France</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+              <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+              <ul class="navbar-nav me-auto sm-2 sm-lg-0">
+                <li class="nav-item">
+                  <a href="shop.php"class="nav-link active" aria-current="page">Boutique</a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link active" aria-current="page">Notifications</a>
+                </li>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link active" aria-current="page">Panier</a>
+                </li>
+                <li class="nav-item">
+                  <?php
+                  session_start();
+                  if (isset($_SESSION["identifiant"])) {
+                      echo '<a href="account/account.php" class="nav-link active" id="accountLink" aria-current="page">' . $_SESSION['identifiant'] . '</a>';
+                  } else {
+                      echo '<a href="#" class="nav-link active popup-link connexion" aria-current="page">Vous n\'êtes pas connecté</a>';
+                  }
+                  ?>
+                </li>
+              </ul>
             </div>
+          </div>
         </nav>
     </header>
     <br>
-
-
-
+<body>
+    <!-- Pour la Pop up -->
+    <div id="popup" class="popup">
+        <span class="close">&times;</span>
+        <h2>Connexion</h2>
+        <form action="connexion.php" method="post">
+          <input type="text" placeholder="Identifiant" name="identifiant">
+          <input type="password" placeholder="Mot de passe" name="mot_de_passe">
+          <button id="ConnexionButton" name="LogIn" type="submit" formaction="connexion.php">Connexion</button>
+        </form>
+        <button href="SungUp.html" id="createAccountButton" name="SingUp">Créer un compte</button>
+      </div>
+      <!-- Pour la Pop up -->                        
+      <br><br>                  
     <div class="container my-3">
         <div class="row">
             <div class="col-lg-12">

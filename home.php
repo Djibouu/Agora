@@ -14,7 +14,7 @@
 </head>
 <body>
   
-
+   
   <header>
         <nav class="navbar navbar-expand-xl bg-body-tertiary fixed-top py-lg-3">
           <div class="container-fluid">
@@ -25,7 +25,7 @@
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
               <ul class="navbar-nav me-auto sm-2 sm-lg-0">
                 <li class="nav-item">
-                  <a class="nav-link active" aria-current="page">Boutique</a>
+                  <a href="shop.php"class="nav-link active" aria-current="page">Boutique</a>
                 </li>
                 <li class="nav-item">
                   <a class="nav-link active" aria-current="page">Notifications</a>
@@ -43,7 +43,7 @@
                       echo '<a href="#" class="nav-link active popup-link connexion" aria-current="page">Vous n\'êtes pas connecté</a>';
                   }
                   ?>
-              </li>
+                </li>
               
 
                 
@@ -57,7 +57,7 @@
         <h1>Bienvenue sur Agora France !</h1>
         <p>Le site n°1 des matériels de sécurité en France.</p>
         <div>
-          <a href='boutique/shop.php'><button type="button" class="btn btn-outline-primary .btn-lg" >BOUTIQUE</button></a>
+          <a href='shop.php'><button type="button" class="btn btn-outline-primary .btn-lg" >BOUTIQUE</button></a>
           <?php
                   if (isset($_SESSION["identifiant"])) {
                   } else {
@@ -112,25 +112,25 @@
 
     <section id="pricings">
     <div class="container text-center">
-      <h2><u>Séléction du jour.</u></h2>
+      <h2><u>Séléction du jour</u></h2>
       <br>
       <div class="row gx-5">
         <div class="col-md">
           <div class="pricing">
             <h3>Article1</h3>
-            <p>image+prix.</p>
+            <p>image+prix</p>
           </div>
         </div>
         <div class="col-md ">
           <div class="pricing">
             <h3>Article2</h3>
-            <p>image+prix.</p>
+            <p>image+prix</p>
           </div>
         </div>
         <div class="col-md">
           <div class="pricing">
             <h3>Article3</h3>
-            <p>image+prix.</p>
+            <p>image+prix</p>
           </div>
         </div>
       </div>
