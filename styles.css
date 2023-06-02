@@ -226,3 +226,22 @@ color: #808000;
   background-color: #666;
 }
 
+/* cartes de la page boutique */
+
+.product-card {
+  transition: transform 0.3s;
+  margin-bottom: 20px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  height: 100%;
+}
+.product-card:hover {
+  transform: scale(1.05);
+}
+.product-card .card-img-top {
+  flex: 1;
+}
+.product-card .card-body {
+  flex: none;
+}
