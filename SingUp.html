@@ -2,17 +2,16 @@
 <html>
 <head>
   <title>Form</title>
-  <link rel="stylesheet" type="text/css" href="SingIn.css">
+  <link rel="stylesheet" type="text/css" href="SingUp.css">
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
 
 </head>
 <body>
 
-<form id="myForm" class="container mt-5">
+  <form id="myForm" class="container mt-5" action="SingUp.php" method="POST" enctype="multipart/form-data">
     <div class="form-group">
-        <label for="userType">Choose user type:</label>
         <select id="userType" name="userType" class="form-control">
-        <option value="">Select user type</option>
+        <option value="">Choisissez votre statut</option>
         <option value="vendeur">Vendeur</option>
         <option value="acheteur">Acheteur</option>
         </select>
@@ -34,13 +33,10 @@
 
     <label for="pseudo" class="hidden">Pseudo:</label>
     <input type="text" id="pseudo" name="pseudo" class="hidden" required>
-
-    <label for="image" class="hidden">Image:</label>
-    <input type="text" id="image" name="image" class="hidden" required>
-
+    
     <label for="adresse" class="hidden">Adresse:</label>
     <input type="text" id="adresse" name="adresse" class="hidden">
-
+    
     <label for="ville" class="hidden">Ville:</label>
     <input type="text" id="ville" name="ville" class="hidden">
 
@@ -65,9 +61,14 @@
     <label for="codeCarte" class="hidden">Code de Carte:</label>
     <input type="text" id="codeCarte" name="codeCarte" class="hidden">
 
+    <br><br>
+    <label for="image" class="hidden">Image:</label>
+    <input type="file" id="image" name="image" class="hidden" required>
+    
+    <br><br>
     <button type="submit" id="submitBtn" class="hidden">Submit</button>
   </form>
-  <script src="SingIn.js"></script>
+  <script src="SingUp.js"></script>
   
 </body>
 </html>
