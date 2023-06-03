@@ -1,69 +1,122 @@
-<?php
-// Récupérer les valeurs du formulaire
-$userType = $_POST['userType'];
-$nom = $_POST['nom'];
-$prenom = $_POST['prenom'];
-$email = $_POST['email'];
-$password = $_POST['password'];
-$pseudo = $_POST['pseudo'];
-$image = $_FILES['image']['tmp_name']; // Chemin temporaire de l'image téléchargée
-$adresse = $_POST['adresse'];
-$ville = $_POST['ville'];
-$codePostal = $_POST['codePostal'];
-$pays = $_POST['pays'];
-$typePaiement = $_POST['typePaiement'];
-$numeroCarte = $_POST['numeroCarte'];
-$nomCarte = $_POST['nomCarte'];
-$dateExpiration = $_POST['dateExpiration'];
-$codeCarte = $_POST['codeCarte'];
 
-// Connexion à la base de données
-$database = "agora";
-$db_handle = mysqli_connect('localhost:3306', 'root', '');
-$db_found = mysqli_select_db($db_handle, $database);
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Form</title>
+  <link rel="stylesheet" type="text/css" href="SingUp.css">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+  <head>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha2/dist/css/bootstrap.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.0/css/all.min.css">
+    <link rel="stylesheet" href="styles.css">
+</head>
+</head>
+<body>
+  <header>
+    <nav class="navbar navbar-expand-xl bg-body-tertiary fixed-top py-lg-3">
+          <div class="container-fluid">
+            <a id="agoraButton" class="navbar-brand " href="home.php">Agora France</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+              <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+              <ul class="navbar-nav me-auto sm-2 sm-lg-0">
+                <li class="nav-item">
+                  <a href="shop.php"class="nav-link active" aria-current="page">Boutique</a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link active" aria-current="page">Notifications</a>
+                </li>
+                </li>
+                <li class="nav-item">
+                    <?php
+                    session_start();
+                    if (isset($_SESSION["identifiant"])) {
+                        echo '<a href="panier.php" class="nav-link active" aria-current="page">Panier</a>';
+                    } else {
+                    }
+                    ?>
+                </li>
+                <li class="nav-item">
+                    <?php
+                    if (isset($_SESSION["identifiant"])) {
+                        echo '<a href="account.php" class="nav-link active" id="accountLink" aria-current="page">' . $_SESSION['identifiant'] . '</a>';
+                    } else {
+                        echo '<a href="#" class="nav-link active popup-link connexion" aria-current="page">Vous n\'êtes pas connecté</a>';
+                    }
+                    ?>
+                </li>
+              </ul>
+            </div>
+          </div>
+        </nav>
+    </header>
+      <br>
+  <form id="myForm" class="container mt-5" action="SingUp2.php" method="POST" enctype="multipart/form-data">
+    <div class="form-group">
+        <select id="userType" name="userType" class="form-control">
+        <option value="">Choisissez votre statut</option>
+        <option value="vendeur">Vendeur</option>
+        <option value="acheteur">Acheteur</option>
+        </select>
+    </div>
+      
+  
 
-if ($db_found) {
-    // Vérifier le type d'utilisateur
-    if ($userType === "acheteur") {
-        // Insérer les données dans la table "acheteur"
-        $sql = "INSERT INTO acheteur (Nom, Prenom, email, Password, Pseudo, Adresse, Ville, Code_Postal, Pays, Type_de_Payement, Numero_Carte, Nom_Carte, Date_Expritation, Code_Carte, Image) 
-                VALUES ('$nom', '$prenom', '$email', '$password', '$pseudo', '$adresse', '$ville', '$codePostal', '$pays', '$typePaiement', '$numeroCarte', '$nomCarte', '$dateExpiration', '$codeCarte', ?)";
-        $stmt = mysqli_prepare($db_handle, $sql);
+    <label for="nom" class="hidden">Nom:</label>
+    <input type="text" id="nom" name="nom" class="hidden" required>
 
-        // Lire le contenu de l'image
-        $imageData = file_get_contents($image);
+    <label for="prenom" class="hidden">Prenom:</label>
+    <input type="text" id="prenom" name="prenom" class="hidden" required>
 
-        // Lier le contenu de l'image au paramètre de la requête
-        mysqli_stmt_bind_param($stmt, "s", $imageData);
+    <label for="email" class="hidden">Email:</label>
+    <input type="email" id="email" name="email" class="hidden" required>
 
-        // Exécuter la requête
-        mysqli_stmt_execute($stmt);
-        
-    } elseif ($userType === "vendeur") {
-        // Insérer les données dans la table "vendeur"
-        $sql = "INSERT INTO vendeur (Pseudo, Password, email, Nom, Prenom, Image) 
-                VALUES ('$pseudo', '$password', '$email', '$nom', '$prenom', ?)";
-        $stmt = mysqli_prepare($db_handle, $sql);
+    <label for="password" class="hidden">Password:</label>
+    <input type="password" id="password" name="password" class="hidden" required>
 
-        // Lire le contenu de l'image
-        $imageData = file_get_contents($image);
+    <label for="pseudo" class="hidden">Pseudo:</label>
+    <input type="text" id="pseudo" name="pseudo" class="hidden" required>
+    
+    <label for="adresse" class="hidden">Adresse:</label>
+    <input type="text" id="adresse" name="adresse" class="hidden">
+    
+    <label for="ville" class="hidden">Ville:</label>
+    <input type="text" id="ville" name="ville" class="hidden">
 
-        // Lier le contenu de l'image au paramètre de la requête
-        mysqli_stmt_bind_param($stmt, "s", $imageData);
+    <label for="codePostal" class="hidden">Code Postal:</label>
+    <input type="text" id="codePostal" name="codePostal" class="hidden">
 
-        // Exécuter la requête
-        mysqli_stmt_execute($stmt);
-        
-    } else {
-        // Type d'utilisateur invalide
-        die("Type d'utilisateur invalide");
-    }
-    header('Location:home.php');
-} else {
-    //si le BDD n'existe pas
-    echo "Database not found";
-}
+    <label for="pays" class="hidden">Pays:</label>
+    <input type="text" id="pays" name="pays" class="hidden">
 
-// Fermer la connexion
-mysqli_close($db_handle);
-?>
+    <label for="typePaiement" class="hidden">Type de Paiement:</label>
+    <input type="text" id="typePaiement" name="typePaiement" class="hidden">
+
+    <label for="numeroCarte" class="hidden">Numero de Carte:</label>
+    <input type="text" id="numeroCarte" name="numeroCarte" class="hidden">
+
+    <label for="nomCarte" class="hidden">Nom de Carte:</label>
+    <input type="text" id="nomCarte" name="nomCarte" class="hidden">
+
+    <label for="dateExpiration" class="hidden">Date d'Expiration:</label>
+    <input type="date" id="dateExpiration" name="dateExpiration" class="hidden">
+    <br>
+    <label for="codeCarte" class="hidden">Code de Carte:</label>
+    <input type="text" id="codeCarte" name="codeCarte" class="hidden">
+
+    <br><br>
+    <label for="image" class="hidden">Image:</label>
+    <input type="file" id="image" name="image" class="hidden" required>
+    
+    <br><br>
+    <button type="submit" id="submitBtn" class="hidden">Submit</button>
+  </form>
+  <script src="SingUp.js"></script>
+  <br>
+  <br>
+  <br>
+</body>
+</html>

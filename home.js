@@ -58,7 +58,7 @@ document.addEventListener("DOMContentLoaded", function () {
   
 
   createAccountButton.addEventListener("click", function () {
-    window.location.href = "SingUp.html";
+    window.location.href = "SingUp.php";
   });
   closeIcon.addEventListener("click", function () {
     popup.style.display = "none";

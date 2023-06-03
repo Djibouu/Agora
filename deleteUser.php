@@ -43,6 +43,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 <!DOCTYPE html>
 <html>
 <head>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha2/dist/css/bootstrap.min.css">
+<link rel="stylesheet" href="styles.css">
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -98,7 +100,46 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         }
     </style>
 </head>
+
+<header>
+<nav class="navbar navbar-expand-xl bg-body-tertiary fixed-top py-lg-3">
+          <div class="container-fluid">
+            <a id="agoraButton" class="navbar-brand " href="home.php">Agora France</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+              <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+              <ul class="navbar-nav me-auto sm-2 sm-lg-0">
+                <li class="nav-item">
+                  <a href="shop.php"class="nav-link active" aria-current="page">Boutique</a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link active" aria-current="page">Notifications</a>
+                </li>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link active" aria-current="page">Panier</a>
+                </li>
+                <li class="nav-item">
+                  <?php
+                  
+                  if (isset($_SESSION["identifiant"])) {
+                      echo '<a href="account.php" class="nav-link active" id="accountLink" aria-current="page">' . $_SESSION['identifiant'] . '</a>';
+                  } else {
+                      echo '<a href="#" class="nav-link active popup-link connexion" aria-current="page">Vous n\'êtes pas connecté</a>';
+                  }
+                  ?>
+                </li>
+              
+
+                
+              </ul>
+            </div>
+          </div>
+        </nav>
+    </header>
 <body>
+
     <div class="container">
         <h1>Liste des utilisateurs</h1>
 

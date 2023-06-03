@@ -32,13 +32,21 @@
                 </li>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link active" aria-current="page">Panier</a>
+                  <?php
+                      session_start();
+                      
+                      if (isset($_SESSION["identifiant"])) {
+                          if($_SESSION['type'] == 'acheteur'){
+                            echo '<a href="panier.php" class="nav-link active" aria-current="page">Panier</a>';
+                          }
+                      } else {
+                      }
+                  ?>
                 </li>
                 <li class="nav-item">
                   <?php
-                  session_start();
                   if (isset($_SESSION["identifiant"])) {
-                      echo '<a href="account/account.php" class="nav-link active" id="accountLink" aria-current="page">' . $_SESSION['identifiant'] . '</a>';
+                      echo '<a href="account.php" class="nav-link active" id="accountLink" aria-current="page">' . $_SESSION['identifiant'] . '</a>';
                   } else {
                       echo '<a href="#" class="nav-link active popup-link connexion" aria-current="page">Vous n\'êtes pas connecté</a>';
                   }
@@ -77,7 +85,7 @@
           <input type="password" placeholder="Mot de passe" name="mot_de_passe">
           <button id="ConnexionButton" name="LogIn" type="submit" formaction="connexion.php">Connexion</button>
         </form>
-        <button href="SungUp.html" id="createAccountButton" name="SingUp">Créer un compte</button>
+        <button href="SingUp.php" id="createAccountButton" name="SingUp">Créer un compte</button>
       </div>
       <!-- Pour la Pop up -->
 

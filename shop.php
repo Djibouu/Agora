@@ -38,13 +38,21 @@
                 </li>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link active" aria-current="page">Panier</a>
+                  <?php
+                      session_start();
+                      
+                      if (isset($_SESSION["identifiant"])) {
+                          if($_SESSION['type'] == 'acheteur'){
+                            echo '<a href="panier.php" class="nav-link active" aria-current="page">Panier</a>';
+                          }
+                      } else {
+                      }
+                  ?>
                 </li>
                 <li class="nav-item">
                   <?php
-                  session_start();
                   if (isset($_SESSION["identifiant"])) {
-                      echo '<a href="account/account.php" class="nav-link active" id="accountLink" aria-current="page">' . $_SESSION['identifiant'] . '</a>';
+                      echo '<a href="account.php" class="nav-link active" id="accountLink" aria-current="page">' . $_SESSION['identifiant'] . '</a>';
                   } else {
                       echo '<a href="#" class="nav-link active popup-link connexion" aria-current="page">Vous n\'êtes pas connecté</a>';
                   }
@@ -57,18 +65,7 @@
     </header>
     <br>
 <body>
-    <!-- Pour la Pop up -->
-    <div id="popup" class="popup">
-        <span class="close">&times;</span>
-        <h2>Connexion</h2>
-        <form action="connexion.php" method="post">
-          <input type="text" placeholder="Identifiant" name="identifiant">
-          <input type="password" placeholder="Mot de passe" name="mot_de_passe">
-          <button id="ConnexionButton" name="LogIn" type="submit" formaction="connexion.php">Connexion</button>
-        </form>
-        <button href="SungUp.html" id="createAccountButton" name="SingUp">Créer un compte</button>
-      </div>
-      <!-- Pour la Pop up -->                        
+                         
       <br><br>                  
     <div class="container my-3">
         <div class="row">
@@ -127,17 +124,19 @@
                         $nom = $product['Nom'];
                         $prix = $product['Prix'];
                         $imageData = $product['Image'];
-            
-                        // Afficher chaque produit
-                        echo '<div class="col-lg-4">';
+                        $productId = $product['id'];
+                
+                        // Lien vers la page du produit individuel
+                        echo '<a href="product.php?id=' . $productId . '" class="col-lg-4 col-md-6 col-sm-12">';
                         echo '<div class="card product-card">';
                         echo '<img src="data:image/jpeg;base64,' . base64_encode($imageData) . '" class="card-img-top" alt="Product Image">';
                         echo '<div class="card-body">';
                         echo '<h5 class="card-title">' . $nom . ' - ' . $prix . ' €</h5>';
                         echo '</div>';
                         echo '</div>';
-                        echo '</div>';
+                        echo '</a>';
                     }
+                
                 } else {
                     // Aucun produit trouvé dans la base de données
                     echo "Aucun produit trouvé.";
@@ -153,7 +152,18 @@
             ?>
         </div>
     </div>
-
+    <!-- Pour la Pop up -->
+    <div id="popup" class="popup">
+        <span class="close">&times;</span>
+        <h2>Connexion</h2>
+        <form action="connexion.php" method="post">
+          <input type="text" placeholder="Identifiant" name="identifiant">
+          <input type="password" placeholder="Mot de passe" name="mot_de_passe">
+          <button id="ConnexionButton" name="LogIn" type="submit" formaction="connexion.php">Connexion</button>
+        </form>
+        <button href="SungUp.html" id="createAccountButton" name="SingUp">Créer un compte</button>
+      </div>
+      <!-- Pour la Pop up -->   
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha2/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>

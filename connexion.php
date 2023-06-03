@@ -20,7 +20,13 @@ if ($db_found) {
     if (mysqli_num_rows($result) == 1) {
         // Informations de connexion correctes, enregistrer l'identifiant de l'utilisateur dans une variable de session
         $_SESSION["identifiant"] = $identifiant;
-        
+        $sql= "SELECT id FROM vendeur WHERE email = '{$_SESSION["identifiant"]}'";
+        $result = mysqli_query($db_handle, $sql);
+        if ($row = mysqli_fetch_assoc($result)) {
+            $_SESSION["id"] = $row['id'];
+            $_SESSION["type"] = 'vendeur';
+        }
+
         // Rediriger l'utilisateur vers la page d'accueil
         header("Location: home.php");
         exit;
@@ -31,6 +37,13 @@ if ($db_found) {
         if (mysqli_num_rows($result) == 1) {
             // Informations de connexion correctes, enregistrer l'identifiant de l'utilisateur dans une variable de session
             $_SESSION["identifiant"] = $identifiant;
+            $sql= "SELECT id FROM acheteur WHERE email = '{$_SESSION["identifiant"]}'";
+            $result = mysqli_query($db_handle, $sql);
+            if ($row = mysqli_fetch_assoc($result)) {
+                $_SESSION["id"] = $row['id'];
+                $_SESSION["type"] = 'acheteur';
+            }
+
             // Rediriger l'utilisateur vers la page d'accueil
             header("Location: home.php");
             exit;
@@ -39,6 +52,13 @@ if ($db_found) {
             $result = mysqli_query($db_handle, $sql);
             if (mysqli_num_rows($result) == 1){
                 $_SESSION["identifiant"] = $identifiant;
+                $sql= "SELECT id FROM admin WHERE email = '{$_SESSION["identifiant"]}'";
+                $result = mysqli_query($db_handle, $sql);
+                if ($row = mysqli_fetch_assoc($result)) {
+                    $_SESSION["id"] = $row['id'];
+                    $_SESSION["type"] = 'admin';
+                }
+
             }
             header("Location: home.php");
             

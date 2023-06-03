@@ -2,6 +2,6 @@
 session_start();
 session_destroy();
 
-header('Location: \GitVisio/Agora-1/home.php');
+header('Location: home.php');
 exit();
 ?>
