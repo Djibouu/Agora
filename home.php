@@ -180,10 +180,10 @@
         <h2><u>Notre histoire</u></h2>
         <div class="row">
           <div class="col">
-              <p>Bienvenue sur Agora France, votre destination en ligne pour tout le <u>matériel de police, de gendarmerie et des forces de l'ordre</u>.</p>
-              <p>Nous sommes fiers de vous offrir une sélection soigneusement choisie <u>d'articles spécialisés</u> pour répondre aux besoins uniques des professionnels de la sécurité.</p>
-              <p>Chez Agora France, nous comprenons l'importance vitale de fournir aux forces de l'ordre les outils et l'équipement nécessaires pour assurer leur mission en toute confiance.</p>
-              <p>Notre équipe passionnée est composée d'experts de l'industrie qui sélectionnent <u>rigoureusement</u> chaque produit afin de garantir une <u>qualité supérieure et une fonctionnalité optimale</u>.</p>
+              <p>Bienvenue sur Agora France, votre destination en ligne pour tout le <u>divers objets de toutes catégories</u>.</p>
+              <p>Nous sommes fiers de vous offrir une sélection soigneusement choisie <u>d'articles spécialisés</u> pour répondre aux besoins uniques de chauque client.</p>
+              <p>Chez Agora France, nous comprenons l'importance de fournir des produits de qualité et de se faire livrer en toute confiance.</p>
+              <p>Notre équipe passionnée est composée d'experts de l'industrie qui sélectionnent <u>rigoureusement</u> chaque produit afin de garantir une <u>qualité supérieure et une expérience optimale</u>.</p>
           </div>
         </div>
     </section>
