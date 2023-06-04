@@ -215,7 +215,7 @@
 
                             // ...
 
-                            if ($categorie == "direct" && $_SESSION['type'] == 'acheteur') {
+                            if (isset($_SESSION["identifiant"]) && $categorie == "direct" && $_SESSION['type'] == 'acheteur') {
                                 echo '<form>';
                                 if (isset($_SESSION["id"])) {
                                     echo '<input type="hidden" name="user_id" value="' . $_SESSION['id'] . '">';
@@ -229,7 +229,7 @@
                                 
                                 echo '</form>';
                             }
-                            if ($_SESSION['type'] == 'admin') {
+                            if (isset($_SESSION["identifiant"]) && $_SESSION['type'] == 'admin') {
                                 echo '<form>';
                                 if (isset($_SESSION["id"])) {
                                     echo '<input type="hidden" name="user_id" value="' . $_SESSION['id'] . '">';
@@ -254,7 +254,7 @@
 
                             // ...
 
-                            if ($categorie == "negocier" && $_SESSION['type'] == 'acheteur') {
+                            if (isset($_SESSION["identifiant"]) && $categorie == "negocier" && $_SESSION['type'] == 'acheteur') {
                                 echo '<div id="negotiate-form" style="display: none;">';
                                 echo '<h3>Négocier le prix</h3>';
                                 echo '<form id="negotiate-price-form" action="negotiate.php" method="post">';
@@ -268,7 +268,7 @@
                             
                                 echo '<button type="button" class="btn btn-outline-primary btn-lg" onclick="showNegotiateForm()">Négocier</button>';
                             }
-                            if ($categorie == "enchere" && $_SESSION['type'] == 'acheteur') {
+                            if (isset($_SESSION["identifiant"]) && $categorie == "enchere" && $_SESSION['type'] == 'acheteur') {
                                 $userId = $_SESSION["id"];
                                 // Récupérer le solde de l'utilisateur
                                 $sql = "SELECT Solde FROM acheteur WHERE id = $userId";

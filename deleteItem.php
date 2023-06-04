@@ -19,7 +19,6 @@ if ($db_found) {
     } elseif ($_SESSION['type'] == 'admin') {
         $idAdmin = $_SESSION['id'];
         $sql = "SELECT * FROM item";
-        $sql = "SELECT * FROM item WHERE idAdmin = $idAdmin";
         $result = mysqli_query($db_handle, $sql);
     }
 } else {
@@ -105,6 +104,21 @@ if ($db_found) {
     <?php
     if (mysqli_num_rows($result) > 0) {
         while ($row = mysqli_fetch_assoc($result)) {
+            if (!empty($row['idVendeur'])) {
+                $sql = "SELECT * FROM vendeur WHERE id = {$row['idVendeur']}";
+                $result2 = mysqli_query($db_handle, $sql);
+                $row2 = mysqli_fetch_assoc($result2);
+                
+            }
+            
+            elseif (!empty($row['idAdmin'])) {
+                $sql = "SELECT * FROM admin WHERE id = {$row['idAdmin']}";
+                $result2 = mysqli_query($db_handle, $sql);
+                $row2 = mysqli_fetch_assoc($result2);
+                
+            } else {
+                echo '<p class="card-text">Vendeur : Non disponible</p>';
+            }
             echo '<div class="row justify-content-center">';
             echo    '<div class="col-lg-8">';
             echo        '<div class="card item-card" >';
@@ -119,6 +133,9 @@ if ($db_found) {
             echo                        '<p class="card-text">' . $row["Description"] . '</p>';
             echo                        '<p class="card-text">Prix : ' . $row["Prix"] . '</p>';
             echo                        '<p class="card-text">Stock : ' . $row["Stock"] . '</p>';
+            if($_SESSION['type'] == 'admin'){
+                echo                        '<p class="card-text">Vendeur : ' . $row2["Pseudo"] . '</p>';
+            }
             echo                        '<form method="POST" action="processDeleteItem.php">';
             echo                            '<input type="hidden" name="item_id" value="' . $row["id"] . '">';
             echo                            '<button type="submit" class="btn btn-danger">Supprimer ce produit</button>';

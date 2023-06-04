@@ -20,11 +20,19 @@
                   <a href="shop.php"class="nav-link active" aria-current="page">Boutique</a>
                 </li>
                 <li class="nav-item">
-                  <a class="nav-link active" aria-current="page">Notifications</a>
-                </li>
+                        <?php
+                            
+                            session_start();
+                            if (isset($_SESSION["identifiant"])) {
+                                
+                                echo '<a href="notification.php" class="nav-link active" aria-current="page">Notifications</a>';
+                                
+                            } 
+                        ?>
+                    </li>
                 <li class="nav-item">
                   <?php
-                      session_start();
+                      
                       $database = "agora";
                       $db_handle = mysqli_connect('localhost:3306', 'root', '');
                       $db_found = mysqli_select_db($db_handle, $database);
@@ -191,7 +199,7 @@
             ?>
         </div>
     </div>
-</body><br><br>
+</body><br><br><br><br>
 <footer>
       &copy;2023 "Agora France", Tous droits réservés. | Conditions générales de vente | Politique de confidentialité | Mentions légales | <a style = "color:white"href="info.php">Contact</a>
     </footer>
