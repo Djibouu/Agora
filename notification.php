@@ -106,9 +106,12 @@ if ($db_found) {
     </div>
 
     <?php
+    $cpt = 0;
+        $cpt2 = 0;
     if (mysqli_num_rows($result) > 0) {
+        
         while ($row = mysqli_fetch_assoc($result)) {
-            if($row["Offre"]>0 || $row["Categorie"] == 'enchere'){
+            if($row['Offrant'] != 0){
                 echo '<div class="row justify-content-center">';
                 echo    '<div class="col-lg-8">';
                 echo        '<div class="card item-card" >';
@@ -123,7 +126,12 @@ if ($db_found) {
                 echo                        '<p class="card-text">' . $row["Description"] . '</p>';
                 echo                        '<p class="card-text">Prix : ' . $row["Prix"] . ' €</p>';
                 echo                        '<p class="card-text">Stock : ' . $row["Stock"] . '</p>';
-                echo                        '<p class="card-text">Offre à : ' . $row["Offre"] . ' €</p>';
+                if($row['Categorie'] == "negocier"){
+                    echo                        '<p class="card-text">Offre à : ' . $row["Offre"] . ' €</p>';
+                }
+                if($row['Categorie'] == "enchere"){
+                    echo                        '<p class="card-text">Offre à : ' . $row["Prix"] . ' €</p>';
+                }
                 if($_SESSION['type'] !== 'acheteur' && $row["Categorie"] == 'negocier' ){
                     echo                        '<form method="POST" action="acceptOffer.php">';
                     echo                            '<input type="hidden" name="item_id" value="' . $row["id"] . '">';
@@ -150,21 +158,15 @@ if ($db_found) {
                 echo    '</div>';
                 echo '</div>';
             }
-            else {
-                echo '<div class="row justify-content-center">';
-                echo    '<div class="col-lg-8">';
-                echo        '<div class="card">';
-                echo            '<div class="card-body">';
-                echo                '<p class="card-text">Aucun article à afficher.</p>';
-                echo            '</div>';
-                echo        '</div>';
-                echo    '</div>';
-                echo '</div>';
+            else{
+                $cpt = $cpt + 1;
             }
+            $cpt2 = $cpt2 + 1;
             
         }
         
-    } else {
+    } 
+    if($cpt == $cpt2) {
         echo '<div class="row justify-content-center">';
         echo    '<div class="col-lg-8">';
         echo        '<div class="card">';
