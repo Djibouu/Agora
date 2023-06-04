@@ -20,11 +20,19 @@
                   <a href="shop.php"class="nav-link active" aria-current="page">Boutique</a>
                 </li>
                 <li class="nav-item">
-                  <a class="nav-link active" aria-current="page">Notifications</a>
+                  <?php
+                      
+                      session_start();
+                      if (isset($_SESSION["identifiant"])) {
+                          
+                        echo '<a href="notification.php" class="nav-link active" aria-current="page">Notifications</a>';
+                          
+                      } 
+                  ?>
                 </li>
                 <li class="nav-item">
                   <?php
-                      session_start();
+                      
                       $database = "agora";
                       $db_handle = mysqli_connect('localhost:3306', 'root', '');
                       $db_found = mysqli_select_db($db_handle, $database);
@@ -158,7 +166,14 @@
                             mysqli_query($db_handle, $sqlUpdateSolde);
                             $sqlUpdateSolde = "UPDATE acheteur SET SoldeCadeau = $newSoldeCadeau WHERE id = $userId";
                             mysqli_query($db_handle, $sqlUpdateSolde);
-
+                            if($item['Stock'] > 1){
+                              $sqlUpdateSolde = "UPDATE item SET Stock = Stock-1 WHERE id = {$item['id']}";
+                              mysqli_query($db_handle, $sqlUpdateSolde);
+                            }
+                            else{ 
+                              $sqlClearCart = "DELETE FROM item WHERE id = {$item['id']}";
+                              mysqli_query($db_handle, $sqlClearCart);
+                            }
                             // Clear the user's cart
                             $sqlClearCart = "DELETE FROM panier WHERE idUser = $userId";
                             mysqli_query($db_handle, $sqlClearCart);
@@ -186,5 +201,8 @@
             </div>
         </div>
     </div>
-</body>
+</body><br><br>
+<footer>
+      &copy;2023 "Agora France", Tous droits réservés. | Conditions générales de vente | Politique de confidentialité | Mentions légales | <a style = "color:white"href="info.php">Contact</a>
+    </footer>
 </html>

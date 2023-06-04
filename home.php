@@ -1,3 +1,5 @@
+
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -28,12 +30,18 @@
                   <a href="shop.php"class="nav-link active" aria-current="page">Boutique</a>
                 </li>
                 <li class="nav-item">
-                  <a class="nav-link active" aria-current="page">Notifications</a>
-                </li>
+                  <?php
+                      
+                      session_start();
+                      if (isset($_SESSION["identifiant"])) {
+                          
+                        echo '<a href="notification.php" class="nav-link active" aria-current="page">Notifications</a>';
+                          
+                      } 
+                  ?>
                 </li>
                 <li class="nav-item">
                   <?php
-                      session_start();
                       
                       if (isset($_SESSION["identifiant"])) {
                           if($_SESSION['type'] == 'acheteur'){
@@ -120,30 +128,52 @@
 
     <section id="pricings">
     <div class="container text-center">
+      <?php
+        // Informations de connexion à la base de données
+        $database = "agora";
+        $db_handle = mysqli_connect('localhost:3306', 'root', '');
+        $db_found = mysqli_select_db($db_handle, $database);
+
+        // Vérifier si la connexion a réussi
+        if ($db_found) {
+            $sql = "SELECT id FROM selectionjour";
+            $result = mysqli_query($db_handle, $sql);
+            $selected_items = array();
+
+            if ($result && mysqli_num_rows($result) > 0) {
+                while ($row = mysqli_fetch_assoc($result)) {
+                    $itemId = $row['id'];
+                    $sql = "SELECT * FROM item WHERE id = '$itemId'";
+                    $itemResult = mysqli_query($db_handle, $sql);
+                    
+                    if ($itemResult && mysqli_num_rows($itemResult) > 0) {
+                        $item = mysqli_fetch_assoc($itemResult);
+                        $selected_items[] = $item; // Ajouter le tableau associatif complet à $selected_items
+                    }
+                }
+            }
+        }
+        ?>
+
       <h2><u>Séléction du jour</u></h2>
       <br>
       <div class="row gx-5">
-        <div class="col-md">
-          <div class="pricing">
-            <h3>Article1</h3>
-            <p>image+prix</p>
+      <?php foreach ($selected_items as $item): 
+          $imageData = $item['Image']?>
+          <div class="col-md">
+            <a style = "color :black"href="product.php?id=<?php echo $item['id']; ?>"> <!-- Ici, nous avons ajouté le lien vers la page du produit -->
+              <div class="pricing">
+                <h3><?php echo $item['Nom']; ?></h3>
+                <?php echo '<img src="data:image/jpeg;base64,' . base64_encode($imageData) . '" class="img-fluid rounded-start" alt="Image">';?>
+                <p>Prix: <?php echo $item['Prix']; ?></p>
+              </div>
+            </a>
           </div>
-        </div>
-        <div class="col-md ">
-          <div class="pricing">
-            <h3>Article2</h3>
-            <p>image+prix</p>
-          </div>
-        </div>
-        <div class="col-md">
-          <div class="pricing">
-            <h3>Article3</h3>
-            <p>image+prix</p>
-          </div>
-        </div>
+        <?php endforeach; ?>
       </div>
     </div>
-    </section>
+</section>
+
 
     <section id="meetuss">
       <div class="container">
@@ -158,9 +188,9 @@
         </div>
     </section>
   
-
+    <br><br>
     <footer>
-      &copy;2023 "Agora France", Tous droits réservés. | Conditions générales de vente | Politique de confidentialité | Mentions légales | Contact
+      &copy;2023 "Agora France", Tous droits réservés. | Conditions générales de vente | Politique de confidentialité | Mentions légales | <a style = "color:white"href="info.php">Contact</a>
     </footer>
   <button id="back-to-top" class="back-to-top"> <b>↑</b></button>
   <script src="home.js"></script>

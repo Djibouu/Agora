@@ -25,6 +25,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             // Supprimer les utilisateurs sélectionnés de la base de données
             foreach ($utilisateursASupprimer as $utilisateurId) {
                 $utilisateurId = intval($utilisateurId);
+                
+                $sql_delete = "DELETE FROM item WHERE idVendeur = '$utilisateurId'";
+                $resultSupprimerVendeur = $conn->query($sql_delete);
 
                 $querySupprimerVendeur = "DELETE FROM vendeur WHERE id = '$utilisateurId'";
                 $resultSupprimerVendeur = $conn->query($querySupprimerVendeur);
@@ -44,20 +47,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 <html>
 <head>
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha2/dist/css/bootstrap.min.css">
-<link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.0/css/all.min.css">
+    <link rel="stylesheet" href="styles.css">
     <style>
-        body {
-            font-family: Arial, sans-serif;
-            background-color: #f8f8f8;
-            margin: 0;
-            padding: 20px;
-        }
-
-        h1 {
-            text-align: center;
-            margin-bottom: 30px;
-        }
-
+       
         .container {
             max-width: 800px;
             margin: 0 auto;
@@ -182,7 +177,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             </div>
         </form>
     </div>
-</body>
+</body><br><br>
+<footer>
+      &copy;2023 "Agora France", Tous droits réservés. | Conditions générales de vente | Politique de confidentialité | Mentions légales | <a style = "color:white"href="info.php">Contact</a>
+    </footer>
 </html>
 
 

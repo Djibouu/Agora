@@ -59,18 +59,28 @@ if ($db_found) {
                     $_SESSION["type"] = 'admin';
                 }
 
+            }else{
+                echo '
+                    <script>
+                        if (confirm("Identifiant ou mot de passe incorrect.")) {
+                            window.location.href = "home.php";
+                        } 
+                        else{
+                            window.location.href = "home.php";
+                        }
+                    </script>';
             }
-            header("Location: home.php");
+            
             
         }
 
-        // Informations de connexion incorrectes, afficher un message d'erreur
-        header("Location: home.php");
+        
         
     }
 } else {
     die("La connexion à la base de données a échoué : " . mysqli_connect_error());
 }
+echo '<script>window.location.href = "home.php";</script>';
 
 // Fermer la connexion à la base de données
 mysqli_close($db_handle);

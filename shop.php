@@ -34,12 +34,19 @@
                   <a href="shop.php"class="nav-link active" aria-current="page">Boutique</a>
                 </li>
                 <li class="nav-item">
-                  <a class="nav-link active" aria-current="page">Notifications</a>
-                </li>
+                  <?php
+                      session_start();
+                      
+                      if (isset($_SESSION["identifiant"])) {
+                          
+                        echo '<a href="notification.php" class="nav-link active" aria-current="page">Notifications</a>';
+                          
+                      } 
+                  ?>
                 </li>
                 <li class="nav-item">
                   <?php
-                      session_start();
+                      
                       
                       if (isset($_SESSION["identifiant"])) {
                           if($_SESSION['type'] == 'acheteur'){
@@ -165,5 +172,8 @@
       </div>
       <!-- Pour la Pop up -->   
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha2/dist/js/bootstrap.bundle.min.js"></script>
-</body>
+</body><br><br>
+<footer>
+      &copy;2023 "Agora France", Tous droits réservés. | Conditions générales de vente | Politique de confidentialité | Mentions légales | <a style = "color:white"href="info.php">Contact</a>
+    </footer>
 </html>

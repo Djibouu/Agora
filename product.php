@@ -52,7 +52,77 @@
                     }
                 });
             });
+            $('#add-to-selection-btn').click(function(e) {
+                e.preventDefault();
+
+                // Récupérer les valeurs des attributs de données
+                var userId = $(this).closest('form').find('[name="user_id"]').val();
+                var itemId = $(this).closest('form').find('[name="item_id"]').val();
+                var quantity = $(this).closest('form').find('[name="quantity"]').val();
+
+                // Faire la requête AJAX
+                $.ajax({
+                    url: 'add_to_cart.php',
+                    type: 'post',
+                    data: {
+                        'action': 'add_to_cart',
+                        'user_id': userId,
+                        'item_id': itemId,
+                        'quantity': quantity
+                    },
+
+                    success: function(result) {
+                        // Changer le texte du bouton et ajouter l'icône
+                        $('#add-to-selection-btn').html('Ajouté à la sélection <i class="fas fa-check"></i>');
+                        $('#add-to-selection-btn').prop('disabled', true);
+                        
+                    },
+                    error: function(xhr, status, error) {
+                        console.error('Erreur lors de l\'ajout du produit au panier: ' + error);
+                    }
+                });
+            });
         });
+        function showBidForm() {
+            document.getElementById("bid-form").style.display = "block";
+        }
+
+        function showNegotiateForm() {
+        <?php
+        session_start();
+        $database = "agora";
+        $db_handle = mysqli_connect('localhost:3306', 'root', '');
+        $db_found = mysqli_select_db($db_handle, $database);
+
+        if ($db_found) {
+            // Récupérer le produit à partir de son ID
+            $productId = isset($_GET['id']) ? $_GET['id'] : null;
+
+            if ($productId) {
+                $sql = "SELECT nbOffre FROM item WHERE id = $productId";
+                $result = mysqli_query($db_handle, $sql);
+
+                if ($result && mysqli_num_rows($result) > 0) {
+                    $item = mysqli_fetch_assoc($result);
+                    $nbOffre = $item['nbOffre'];
+
+                    if ($nbOffre < 5) {
+                        echo 'document.getElementById("negotiate-form").style.display = "block";';
+                        
+                    } else {
+                        echo 'alert("Le nombre maximal d\'offres a été atteint.");';
+                        $sql = "UPDATE item SET Offrant = 0, Offre = 0 WHERE id = $productId";
+                        $result2 = mysqli_query($db_handle, $sql);
+                    }
+                }
+            }
+        }
+        ?>
+    }
+        
+        
+    
+
     </script>
 
 
@@ -73,11 +143,19 @@
                             <a href="shop.php" class="nav-link active" aria-current="page">Boutique</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link active" aria-current="page">Notifications</a>
-                        </li>
+                            <?php
+                                
+                                
+                                if (isset($_SESSION["identifiant"])) {
+                                    
+                                    echo '<a href="notification.php" class="nav-link active" aria-current="page">Notifications</a>';
+                                    
+                                } 
+                            ?>
+                            </li>
                         <li class="nav-item">
                             <?php
-                                session_start();
+                                
                                 
                                 if (isset($_SESSION["identifiant"])) {
                                     if($_SESSION['type'] == 'acheteur'){
@@ -148,18 +226,74 @@
                                 echo '<input type="number" name="quantity" class="form-control" placeholder="Quantité" min="1" max="' . $stock . '">';
                                 echo '<button id="add-to-cart-btn" class="btn btn-outline-secondary">Ajouter au panier</button>';
                                 echo '</div>';
-                                echo '<button class="btn btn-outline-primary btn-lg">Acheter maintenant</button>';
+                                
                                 echo '</form>';
                             }
+                            if ($_SESSION['type'] == 'admin') {
+                                echo '<form>';
+                                if (isset($_SESSION["id"])) {
+                                    echo '<input type="hidden" name="user_id" value="' . $_SESSION['id'] . '">';
+                                }
+                                echo '<a id="add-to-selection-btn" class="btn btn-primary" onclick="afficherMessage()">Ajouter à la sélection du jour</a>';
+                                echo '</form>';
+                            }
+                            
+                            echo '<script>
+                                function afficherMessage() {</script>';
+                                    $countQuery = "SELECT COUNT(*) AS count FROM selectionjour";
+                                    $countResult = mysqli_query($db_handle, $countQuery);
+                                    $countRow = mysqli_fetch_assoc($countResult);
+                                    $currentCount = $countRow['count'];
+
+                                    if ($currentCount < 4) {
+                                        $addQuery = "INSERT INTO selectionjour (id) VALUES ($productId)";
+                                        $addResult = mysqli_query($db_handle, $addQuery);
+                                    }
+                                    
+                            '<script>}</script>';
 
                             // ...
 
                             if ($categorie == "negocier" && $_SESSION['type'] == 'acheteur') {
-                                echo '<button type="button" class="btn btn-outline-primary btn-lg">Negocier</button>';
+                                echo '<div id="negotiate-form" style="display: none;">';
+                                echo '<h3>Négocier le prix</h3>';
+                                echo '<form id="negotiate-price-form" action="negotiate.php" method="post">';
+                                echo '<input type="hidden" name="item_id" value="' . $productId . '">';
+                                echo '<label for="offer-price">Prix proposé :</label>';
+                                echo '<input type="number" name="offer_price" id="offer-price" step="1" required>';
+                                echo '<br>';
+                                echo '<button type="submit" class="btn btn-primary">Envoyer</button>';
+                                echo '</form>';
+                                echo '</div>';
+                            
+                                echo '<button type="button" class="btn btn-outline-primary btn-lg" onclick="showNegotiateForm()">Négocier</button>';
                             }
                             if ($categorie == "enchere" && $_SESSION['type'] == 'acheteur') {
-                                echo '<button type="button" class="btn btn-outline-primary btn-lg">Faire une offre</button>';
+                                $userId = $_SESSION["id"];
+                                // Récupérer le solde de l'utilisateur
+                                $sql = "SELECT Solde FROM acheteur WHERE id = $userId";
+                                $userResult = mysqli_query($db_handle, $sql);
+                                $user = mysqli_fetch_assoc($userResult);
+                                $userBalance = $user['Solde'];
+                                if ($userBalance > $prix) {
+                                    echo '<div id="bid-form" style="display: none;">';
+                                    echo '<h3>Enchérir</h3>';
+                                    echo '    <form id="bid-price-form" action="bid.php" method="post">';
+                                    echo '        <input type="hidden" name="item_id" value="' . $productId . '">';
+                                    echo '        <input type="hidden" name="user_id" value="' . $_SESSION['id'] . '">';
+                                    echo '        <label for="offer-price">Prix proposé :</label>';
+                                    echo '        <input type="number" name="offer_price" id="offer-price" step="1" required>';
+                                    echo '        <br>';
+                                    echo '     <button type="submit" class="btn btn-primary">Envoyer</button>';
+                                    echo ' </form>';
+                                    
+                                    echo '</div>';
+                                    echo '<button type="button" class="btn btn-outline-primary btn-lg" onclick="showBidForm()">Enchérir</button>';
+                                } else {
+                                    echo '<p>Votre solde est insuffisant pour enchérir sur cet article.</p>';
+                                }
                             }
+                            
                         } else {
                             // Aucun produit trouvé avec cet ID
                             echo "Produit introuvable";
@@ -187,6 +321,8 @@
     </div>
     <div id="cart-success-message"></div>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha2/dist/js/bootstrap.bundle.min.js"></script>
-</body>
-
+</body><br><br>
+<footer>
+      &copy;2023 "Agora France", Tous droits réservés. | Conditions générales de vente | Politique de confidentialité | Mentions légales | <a style = "color:white"href="info.php">Contact</a>
+    </footer>
 </html>

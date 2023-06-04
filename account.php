@@ -94,8 +94,15 @@ if ($result->num_rows == 0) {
                   <a href="shop.php"class="nav-link active" aria-current="page">Boutique</a>
                 </li>
                 <li class="nav-item">
-                  <a class="nav-link active" aria-current="page">Notifications</a>
-                </li>
+                  <?php
+                      
+                      
+                      if (isset($_SESSION["identifiant"])) {
+                          
+                        echo '<a href="notification.php" class="nav-link active" aria-current="page">Notifications</a>';
+                          
+                      } 
+                  ?>
                 </li>
                 <li class="nav-item">
                   <?php
@@ -148,9 +155,37 @@ if ($result->num_rows == 0) {
                     echo '<div><strong>Solde:</strong> ' . $row["Solde"]. ' € </div>';
                     echo '<div><strong>Solde Cadeau:</strong> ' . $row["SoldeCadeau"]. ' € </div>';
                 }
-                if($user_type == 'admin'){
-                    echo'<button onclick="location.href=\'deleteUser.php\'">gérer les utilisateurs</button>';
-                }
+                if ($user_type == 'admin') {
+                  echo '<button onclick="location.href=\'deleteUser.php\'">gérer les utilisateurs</button>';
+                  echo '<div class="delete-selection">';
+                  echo '<button onclick="deleteSelection()">Supprimer la sélection du jour</button>';
+                  echo '</div>';
+                  echo '<script>
+                          function deleteSelection() {
+                              var confirmDelete = confirm("Êtes-vous sûr de vouloir supprimer la sélection du jour ?");
+                              if (confirmDelete) {
+                                  // Envoi de la requête AJAX vers deleteSelection.php
+                                  var xhr = new XMLHttpRequest();
+                                  xhr.open("POST", "deleteSelection.php", true);
+                                  xhr.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+                                  xhr.onreadystatechange = function() {
+                                      if (xhr.readyState === XMLHttpRequest.DONE && xhr.status === 200) {
+                                          // Affichage de la réponse
+                                          alert(xhr.responseText);
+                                      }
+                                  };
+                                  xhr.send();
+                              }
+                          }
+                        </script>';
+              }
+              
+              
+                if($user_type == 'vendeur' || $user_type == 'admin'){
+                  
+                  echo'<button onclick="location.href=\'addItem.php\'">ajouter un produit</button>';
+                  echo'<button onclick="location.href=\'deleteItem.php\'">supprimer un produit</button>';
+              }
                 echo '</div>';
                 echo '<img src="data:image/jpeg;base64,'.base64_encode( $row['Image'] ).'" class="user-image"/>';
                 break;
@@ -164,6 +199,10 @@ if ($result->num_rows == 0) {
         </div>
     </div>
 </body>
+<br><br>
+<footer>
+      &copy;2023 "Agora France", Tous droits réservés. | Conditions générales de vente | Politique de confidentialité | Mentions légales | <a style = "color:white"href="info.php">Contact</a>
+    </footer>
 </html>
 <?php
 $conn->close();

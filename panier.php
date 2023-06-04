@@ -135,50 +135,50 @@
                         } else {
                             echo "Votre panier est vide.";
                         }
+                        if($totalPrice > 0 ){
+                          // Display total price
+                          echo '<div class="text-center mt-4">';
+                          echo     '<h3>Sous Total: ' . $totalPrice . '€</h3>';
+                          echo     '<form method="POST" action="panier.php">';
+                          echo         '<div class="mb-3">';
+                          echo             '<label for="promoCode" class="form-label">Code Promo:</label>';
+                          echo             '<div class="d-flex">';
+                          echo                '<input type="text" class="form-control input-small" id="promoCode" name="promo_code">';
+                          echo                '<button type="submit" class="btn btn-primary">Valider</button>';
+                          echo             '</div>';
+                          echo         '</div>';
+                          echo     '</form>';
+                          echo '</div>';
 
-                        // Display total price
-                        echo '<div class="text-center mt-4">';
-                        echo     '<h3>Sous Total: ' . $totalPrice . '€</h3>';
-                        echo     '<form method="POST" action="panier.php">';
-                        echo         '<div class="mb-3">';
-                        echo             '<label for="promoCode" class="form-label">Code Promo:</label>';
-                        echo             '<div class="d-flex">';
-                        echo                '<input type="text" class="form-control input-small" id="promoCode" name="promo_code">';
-                        echo                '<button type="submit" class="btn btn-primary">Valider</button>';
-                        echo             '</div>';
-                        echo         '</div>';
-                        echo     '</form>';
-                        echo '</div>';
-
-                        // Check promo code
-                        if (isset($_POST['promo_code'])) {
-                            $promoCode = $_POST['promo_code'];
-                            // Check if promo code is valid
-                            if ($promoCode === "CODE123") {
-                                // Apply promo code and update the user's cadeau balance
-                                $updateCadeauQuery = "UPDATE acheteur SET SoldeCadeau = SoldeCadeau + 100 WHERE id = $userId";
-                                mysqli_query($db_handle, $updateCadeauQuery);
-                                echo '<div class="text-center mt-3">';
-                                echo     '<div class="alert alert-success" role="alert">';
-                                echo         'Code promo appliqué avec succès. Vous avez reçu 100€ sur votre solde cadeau.';
-                                echo     '</div>';
-                                echo '</div>';
-                            } else {
-                                echo '<div class="text-center mt-3">';
-                                echo     '<div class="alert alert-danger" role="alert">';
-                                echo         'Le code promo est invalide.';
-                                echo     '</div>';
-                                echo '</div>';
-                            }
+                          // Check promo code
+                          if (isset($_POST['promo_code'])) {
+                              $promoCode = $_POST['promo_code'];
+                              // Check if promo code is valid
+                              if ($promoCode === "CODE123") {
+                                  // Apply promo code and update the user's cadeau balance
+                                  $updateCadeauQuery = "UPDATE acheteur SET SoldeCadeau = SoldeCadeau + 100 WHERE id = $userId";
+                                  mysqli_query($db_handle, $updateCadeauQuery);
+                                  echo '<div class="text-center mt-3">';
+                                  echo     '<div class="alert alert-success" role="alert">';
+                                  echo         'Code promo appliqué avec succès. Vous avez reçu 100€ sur votre solde cadeau.';
+                                  echo     '</div>';
+                                  echo '</div>';
+                              } else {
+                                  echo '<div class="text-center mt-3">';
+                                  echo     '<div class="alert alert-danger" role="alert">';
+                                  echo         'Le code promo est invalide.';
+                                  echo     '</div>';
+                                  echo '</div>';
+                              }
+                          }
+                          
+                          // Button to validate and pay
+                          echo '<div class="text-center mt-3">';
+                          echo     '<form method="POST" action="checkout.php">';
+                          echo         '<button type="submit" class="btn btn-primary">Valider et Payer</button>';
+                          echo     '</form>';
+                          echo '</div>';
                         }
-                        
-                        // Button to validate and pay
-                        echo '<div class="text-center mt-3">';
-                        echo     '<form method="POST" action="checkout.php">';
-                        echo         '<button type="submit" class="btn btn-primary">Valider et Payer</button>';
-                        echo     '</form>';
-                        echo '</div>';
-
                     } else {
                         echo "Vous devez être connecté pour voir votre panier.";
                     }
@@ -191,5 +191,8 @@
             ?>
         </div>
     </div>
-</body>
+</body><br><br>
+<footer>
+      &copy;2023 "Agora France", Tous droits réservés. | Conditions générales de vente | Politique de confidentialité | Mentions légales | <a style = "color:white"href="info.php">Contact</a>
+    </footer>
 </html>
